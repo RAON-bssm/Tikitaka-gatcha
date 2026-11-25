@@ -1,0 +1,602 @@
+@font-face {
+  font-family: 'OkDanDan';
+  src: url('/fonts/OkDanDan-Bold.ttf') format('truetype');
+  font-display: block;
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 500;
+  src: url('/fonts/Pretendard-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 700;
+  src: url('/fonts/Pretendard-Bold.ttf') format('truetype');
+}
+
+/* 티키타카 앱 팔레트(src/constants/colors.js) */
+:root {
+  --gray-50: #f8f9fb;
+  --gray-100: #eef1f6;
+  --gray-200: #dde2ec;
+  --gray-300: #c4ccda;
+  --gray-400: #9daabb;
+  --gray-500: #6e7d94;
+  --gray-600: #4a5568;
+  --gray-800: #1a202c;
+  --primary-100: #fff3ee;
+  --primary-200: #fed8ca;
+  --primary-600: #fc8253;
+  --primary-700: #e5764c;
+  --secondary-100: #ecf2ff;
+  --secondary-500: #4078ff;
+  --secondary-600: #3a6de8;
+  --secondary-700: #2d55b5;
+  --gold: #ffd257;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--gray-50);
+  color: var(--gray-800);
+  font-family: 'Pretendard', system-ui, sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---------- 레이아웃 ---------- */
+
+.page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5vh 32px 3vh;
+  gap: 1.5vh;
+  background:
+    radial-gradient(circle at 50% 55%, var(--primary-100) 0, transparent 55%),
+    var(--gray-50);
+}
+
+.page-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+.icon-button {
+  border: none;
+  background: transparent;
+  color: var(--gray-300);
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 12px;
+}
+.icon-button:hover {
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+
+.title {
+  text-align: center;
+}
+.title h1 {
+  margin: 0;
+  font-family: 'OkDanDan', sans-serif;
+  font-weight: normal;
+  font-size: clamp(36px, 6vh, 64px);
+  color: var(--primary-600);
+}
+.title p {
+  margin: 0.5vh 0 0;
+  font-size: clamp(16px, 2.2vh, 24px);
+  color: var(--gray-400);
+}
+
+.stage {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6vw;
+}
+
+.machine-wrap {
+  height: 100%;
+  max-height: 62vh;
+  display: flex;
+  justify-content: center;
+}
+
+.machine {
+  position: relative;
+  height: 100%;
+}
+
+.machine-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- 상품 목록 ---------- */
+
+.prize-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.prize-chip {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 22px 12px 14px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgb(26 32 44 / 0.06);
+  transition: opacity 0.3s;
+}
+.prize-chip strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
+.prize-chip span {
+  font-size: 15px;
+  color: var(--gray-500);
+}
+.prize-chip.is-rare {
+  box-shadow:
+    0 0 0 3px var(--gold),
+    0 4px 16px rgb(26 32 44 / 0.06);
+}
+.prize-chip.is-out {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+@media (max-width: 760px) {
+  .stage {
+    flex-direction: column-reverse;
+    gap: 2vh;
+  }
+  .prize-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .prize-chip {
+    padding: 6px 12px 6px 6px;
+  }
+  .prize-chip svg,
+  .prize-chip img {
+    width: 36px;
+    height: 36px;
+  }
+  .prize-chip strong {
+    font-size: 15px;
+  }
+  .prize-chip span {
+    font-size: 12px;
+  }
+  .machine-wrap {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+/* ---------- 뽑기 버튼 ---------- */
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.pull-button {
+  border: none;
+  min-width: 260px;
+  padding: 18px 48px;
+  border-radius: 999px;
+  background: var(--secondary-600);
+  color: #fff;
+  font-family: 'OkDanDan', sans-serif;
+  font-size: clamp(26px, 4vh, 40px);
+  box-shadow: 0 8px 0 var(--secondary-700);
+  transition:
+    transform 0.08s,
+    box-shadow 0.08s,
+    opacity 0.2s;
+}
+.pull-button:hover:not(:disabled) {
+  background: var(--secondary-500);
+}
+.pull-button:active:not(:disabled) {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 var(--secondary-700);
+}
+.pull-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.keys-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--gray-300);
+}
+
+/* ---------- 오버레이 공통 ---------- */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(157 170 187 / 0.55);
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- 캡슐 ---------- */
+
+.capsule {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.capsule-wobble,
+.capsule-wobble img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.capsule-wobble img {
+  filter: drop-shadow(0 10px 18px rgb(26 32 44 / 0.25));
+}
+
+/* 흔들고 잠깐 쉬기를 반복해 "열어 달라"는 신호를 준다. */
+.capsule-wobble.is-wobbling {
+  animation: wobble 1.08s ease-in-out infinite;
+}
+@keyframes wobble {
+  0% { transform: rotate(0); }
+  11% { transform: rotate(8deg); }
+  33% { transform: rotate(-8deg); }
+  44% { transform: rotate(0); }
+  100% { transform: rotate(0); }
+}
+
+.capsule-flash {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+}
+
+.capsule-hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-shadow: 0 1px 6px rgb(26 32 44 / 0.3);
+  animation: fade-in 0.3s both;
+}
+
+/* ---------- 결과 ---------- */
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.2s both;
+}
+
+.result-center {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow-ring {
+  position: absolute;
+  border-radius: 50%;
+  animation:
+    ring-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    ring-pulse 1.2s ease-in-out 0.6s infinite alternate;
+}
+.ring-1 {
+  width: 560px;
+  height: 560px;
+  background: rgb(255 255 255 / 0.3);
+  --pulse: 1.06;
+}
+.ring-2 {
+  width: 430px;
+  height: 430px;
+  background: rgb(255 255 255 / 0.5);
+  animation-delay: 0.08s, 0.68s;
+  --pulse: 1.04;
+}
+.ring-3 {
+  width: 310px;
+  height: 310px;
+  background: rgb(255 255 255 / 0.75);
+  animation-delay: 0.16s, 0.76s;
+  --pulse: 1.02;
+}
+@keyframes ring-in {
+  from { transform: scale(0); }
+}
+@keyframes ring-pulse {
+  to { transform: scale(var(--pulse)); }
+}
+
+.result-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-name {
+  position: relative;
+  margin: 0 0 8px;
+  font-family: 'OkDanDan', sans-serif;
+  font-weight: normal;
+  font-size: 56px;
+  color: #fff;
+  -webkit-text-stroke: 8px var(--gray-800);
+  paint-order: stroke fill;
+  animation: fade-in-down 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+.result-art {
+  animation: bounce-in 0.6s both;
+}
+.result-float {
+  animation: float 1.4s ease-in-out 0.6s infinite alternate;
+}
+
+.result-desc {
+  margin: 12px 0 0;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: var(--primary-600);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  animation: fade-in 0.4s 0.5s both;
+}
+
+.result-hint {
+  position: absolute;
+  bottom: 5vh;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  animation: fade-in 0.4s 1.2s both;
+}
+
+/* 레어: 금빛 후광 + 회전하는 빛줄기 */
+.result.is-rare .overlay-backdrop {
+  background: radial-gradient(circle, rgb(255 210 87 / 0.55), rgb(45 55 72 / 0.75) 70%);
+}
+.result.is-rare .ring-3 {
+  background: rgb(255 236 170 / 0.9);
+}
+.rare-rays {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160vmax;
+  height: 160vmax;
+  margin: -80vmax 0 0 -80vmax;
+  background: repeating-conic-gradient(rgb(255 226 122 / 0.28) 0 8deg, transparent 8deg 22deg);
+  mask-image: radial-gradient(circle, #000 0, transparent 55%);
+  animation:
+    fade-in 0.6s both,
+    spin 14s linear infinite;
+}
+.rare-badge {
+  margin-bottom: 4px;
+  padding: 6px 20px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--gray-800);
+  font-family: 'OkDanDan', sans-serif;
+  font-size: 26px;
+  box-shadow: 0 4px 0 #c99a1e;
+  animation: bounce-in 0.6s 0.4s both;
+}
+
+/* 축하 종이 조각 */
+.confetti {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+.confetti span {
+  position: absolute;
+  border-radius: 3px;
+  opacity: 0;
+  animation: confetti 1.6s cubic-bezier(0.15, 0.7, 0.3, 1) var(--delay) forwards;
+}
+@keyframes confetti {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), calc(var(--dy) + 160px)) rotate(var(--rot));
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+}
+@keyframes bounce-in {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.08); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes float {
+  to { transform: translateY(-10px); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- 설정 패널 ---------- */
+
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.settings-panel {
+  position: relative;
+  width: min(520px, calc(100vw - 32px));
+  padding: 28px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgb(26 32 44 / 0.2);
+  user-select: text;
+}
+.settings-panel h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.settings-sub {
+  margin: 6px 0 18px;
+  color: var(--gray-500);
+  font-size: 14px;
+}
+.settings-panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.settings-panel th,
+.settings-panel td {
+  padding: 10px 6px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-100);
+}
+.settings-panel th {
+  font-size: 13px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.settings-panel input {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  font: inherit;
+}
+.settings-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 22px;
+}
+.ghost-button,
+.primary-button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.ghost-button {
+  background: var(--gray-100);
+  color: var(--gray-600);
+}
+.primary-button {
+  background: var(--secondary-600);
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .result-name {
+    font-size: 40px;
+  }
+  .ring-1 {
+    width: 380px;
+    height: 380px;
+  }
+  .ring-2 {
+    width: 300px;
+    height: 300px;
+  }
+  .ring-3 {
+    width: 230px;
+    height: 230px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-float,
+  .rare-rays,
+  .glow-ring {
+    animation: none;
+  }
+}

@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/prizes.ts","./src/usestock.ts","./src/components/capsulereveal.tsx","./src/components/gachamachine.tsx","./src/components/prizeart.tsx","./src/components/prizeresult.tsx","./src/components/settingspanel.tsx","./vite.config.ts"],"version":"5.9.3"}
