@@ -101,7 +101,7 @@ export default function App() {
               <div>
                 <strong>{p.name}</strong>
                 <span>
-                  {stock[p.id] === 0 ? '소진' : `남은 ${stock[p.id]}개 · ${chanceOf(p, stock).toFixed(0)}%`}
+                  {stock[p.id] === 0 ? '소진' : `확률 ${chanceOf(p, stock).toFixed(0)}%`}
                 </span>
               </div>
             </li>
