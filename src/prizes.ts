@@ -11,8 +11,6 @@ export interface Prize {
   initialStock: number;
   /** 결과 화면 강조. rare면 금빛 연출이 붙는다. */
   rare?: boolean;
-  /** 실물 사진을 쓰려면 public/prizes/ 에 넣고 경로를 적는다. 비우면 기본 일러스트. */
-  image?: string;
 }
 
 export const PRIZES: Prize[] = [

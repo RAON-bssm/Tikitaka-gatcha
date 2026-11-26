@@ -1,7 +1,6 @@
 import { useMemo, type CSSProperties } from 'react';
 
 import type { Prize } from '../prizes';
-import PrizeArt from './PrizeArt';
 
 const CONFETTI_COLORS = ['#FC8253', '#FDAB8C', '#4078FF', '#A7C1FF', '#FFE27A', '#ffffff'];
 
@@ -53,13 +52,8 @@ export default function PrizeResult({ prize, onDismiss }: Props) {
 
         <div className="result-content">
           {prize.rare ? <div className="rare-badge">RARE!</div> : null}
-          <h2 className="result-name" data-text={prize.name}>
-            {prize.name}
-          </h2>
-          <div className="result-art">
-            <div className="result-float">
-              <PrizeArt prize={prize} size={260} />
-            </div>
+          <div className="result-float">
+            <h2 className="result-name">{prize.name}</h2>
           </div>
           <p className="result-desc">{prize.description}</p>
         </div>

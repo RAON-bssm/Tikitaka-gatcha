@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import CapsuleReveal from './components/CapsuleReveal';
 import GachaMachine, { type GachaMachineHandle } from './components/GachaMachine';
-import PrizeArt from './components/PrizeArt';
 import PrizeResult from './components/PrizeResult';
 import SettingsPanel from './components/SettingsPanel';
 import { chanceOf, drawPrize, PRIZES, type Prize } from './prizes';
@@ -97,7 +96,6 @@ export default function App() {
         <ul className="prize-list" aria-label="상품 목록">
           {PRIZES.map((p) => (
             <li key={p.id} className={`prize-chip ${stock[p.id] === 0 ? 'is-out' : ''} ${p.rare ? 'is-rare' : ''}`}>
-              <PrizeArt prize={p} size={64} />
               <div>
                 <strong>{p.name}</strong>
                 <span>
